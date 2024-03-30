@@ -95,3 +95,10 @@ animation: flicker 4s ease-in-out 7.75s infinite alternate both;
     margin-left: 518px;
     padding: 15px;
 }
+#output{
+    position: relative;
+    right: 135px;
+    top: 20px;
+    background-color: black;
+    color: white;
+}
