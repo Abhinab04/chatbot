@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap');
-
-
 body{
     display: block;
     justify-content: center;
@@ -101,6 +99,7 @@ animation: flicker 4s ease-in-out 7.75s infinite alternate both;
     position: relative;
     right: 135px;
     top: 15px;
-    background-color: white;
+    background-color: black;
+    color: white;
     border-radius: 10px;
 }
