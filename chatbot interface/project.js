@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     })
     .then(Response=>Response.json)
     .then(data =>{
-        const responseid=document.getElementById('output');
+        const responseid=document.getElementById('Response');
         responseid.value=data.Response;
     })
     .catch(error =>{
