@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         },
         body:'input'
     })
-    .then(Response=>Response.json()
+    .then(Response=>Response.json())
     .then(data =>{
         const responseid=document.getElementById('Response');
         responseid.value=data.Response;
