@@ -1,20 +1,19 @@
-document.addEventListener("DOMContentLoaded",()=>{
-   const reload=document.getElementById("reload");
-   reload.addEventListener('click',function(){
-    fetch('/getResponse',{
-        method:'POST',
-        headers:{
-            "Content-type":'application/x-www-form-urlencoded'
-        },
-        body:'input'
-    })
-    .then(Response=>Response.json())
-    .then(data =>{
-        const responseid=document.getElementById('Response');
-        responseid.value=data.Response;
-    })
-    .catch(error =>{
-        console.error("error",error);
+document.addEventListener('DOMContentLoaded', () => {
+    const micBtn = document.getElementById('mic-btn');
+    micBtn.addEventListener('click', () => {
+        fetch('/get_response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: 'user_input='
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('output').value = data.response;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     });
-   });
 });
