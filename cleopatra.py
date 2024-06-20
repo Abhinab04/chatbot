@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from win10toast import ToastNotifier
 import os
 class initialization:
+    global set1
     def data(self):
         global transai, trans, transweb, transapp, command
         while not command:
