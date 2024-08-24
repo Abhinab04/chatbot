@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function appendResponse(response) {
-        const output = document.getElementById('output');
-        output.value += response + '\n';
-        output.scrollTop = output.scrollHeight; // Auto-scroll to bottom
+        const output=document.getElementById('output');
+        output.value+=response+'\n';
+        output.scrollTop=output.scrollHeight; 
     }
 });
 
