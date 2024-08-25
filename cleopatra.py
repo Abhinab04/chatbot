@@ -1,10 +1,10 @@
 import speech_recognition as sr
 import pyttsx3
 import google.generativeai as genai
-from selenium import webdriver
+#from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup
-from win10toast import ToastNotifier
+#from win10toast import ToastNotifier
 import os
 class initialization:
     def data(self):
@@ -123,7 +123,7 @@ class other_applications:
     def weather(self):
         if cleo_check:
             a=initialization()
-            n=ToastNotifier()
+            #n=ToastNotifier()
             headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
             r=requests.get("https://weather.com/en-IN/weather/today/l/68509ddcc58030eeb09cd5130641916746139e9174ab3527650e99b108d95ed9", headers=headers)
             soup=BeautifulSoup(r.text, "html.parser")
@@ -136,7 +136,7 @@ class other_applications:
             engine.say("WEATHER UPDATE")
             engine.say(f"{current_info1}\nCurrent temperature is {current_info2}\nIt's {current_info3} today\ntemperature duing day is {l[0]} and during night is {l[1]}")
             engine.runAndWait()
-            n.show_toast("WEATHER UPDATE", res, duration=10)
+            #n.show_toast("WEATHER UPDATE", res, duration=10)
             engine.say("Is there anything else that I can help you with?")   
             engine.runAndWait()
     def webwork(self):
@@ -145,10 +145,10 @@ class other_applications:
         a=initialization()
         wish=a.data_To_Web()
         l=wish.split(" ")
-        if "open" in wish or "launch" in wish:
-            self.webwork_7(l)
-        else:
-            self.webwork_16(l)
+        #if "open" in wish or "launch" in wish:
+            #self.webwork_7(l)
+        #else:
+            #self.webwork_16(l)
     def webwork_16(self, l):
         wish=" ".join(l[2:])
         engine.say(f"searching for {wish} in web")
