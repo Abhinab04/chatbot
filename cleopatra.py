@@ -4,6 +4,10 @@ import google.generativeai as genai
 #from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup
+import sounddevice as sd
+import numpy as np
+import vosk
+import json
 #from win10toast import ToastNotifier
 import os
 class initialization:
@@ -11,18 +15,16 @@ class initialization:
         global transai, trans, transweb, transapp, command
         while not command:
             try:
-                with mic as source:
-                    print("listening...")
-                    r.adjust_for_ambient_noise(source, duration=0.5)    
-                    r.dynamic_energy_threshold=5000
-                    audio=r.listen(source, timeout=5)
-                    command=r.recognize_google(audio)
-            except sr.WaitTimeoutError:
-                pass
-            except sr.UnknownValueError:
-                pass
-            except sr.RequestError:
-                print("Network error")
+                print("listening...")
+                audio=sd.rec(int(16000 * 5), samplerate=16000, channels=1, dtype='int16')
+                sd.wait()
+                audio=np.squeeze(audio)
+                audio_bytes=audio.tobytes()  
+                if recognizer.AcceptWaveform(audio_bytes):
+                    result=json.loads(recognizer.Result())
+                    command=result.get("text", "")
+            except Exception as e:
+                print(f"Error: {e}")
         print(command)
         if "stop" in command:
             trans="stop"
@@ -190,9 +192,11 @@ class other_applications:
 print('say "hey cleo"')
 cleo_check=False
 command=""
-r=sr.Recognizer() 
-mic=sr.Microphone()
+'''r=sr.Recognizer() 
+mic=sr.Microphone()'''
 engine=pyttsx3.init()
+model = vosk.Model("model")  
+recognizer = vosk.KaldiRecognizer(model, 16000)
 voice=engine.getProperty("voices")
 rates=engine.getProperty("rate")
 engine.setProperty("voice", voice[1].id)
