@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: cleopatra
-    env: python
-    buildCommand: |
-      apt-get update && apt-get install -y portaudio19-dev
-      pip install -r requirements.txt
-    startCommand: waitress-serve --port=$PORT app:app
-
