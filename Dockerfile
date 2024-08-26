@@ -1,22 +1,32 @@
-FROM python:3.11-slim
+FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y \
     gcc \
-    libasound-dev \
     portaudio19-dev \
+    libasound2-dev \
+    pulseaudio \
+    pavucontrol \
+    alsa-utils \
+    espeak \
+    jackd2 \
+    libjack-jackd2-0 \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+RUN useradd -m user
+
+RUN mkdir -p /run/user/1000/pulse && chown user:user /run/user/1000/pulse
+
+USER user
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt && pip install waitress
 
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PATH="/home/user/.local/bin:$PATH"
 
 COPY . /app
 
+WORKDIR /app
+
 EXPOSE 5000
 
-ENV NAME World
-
-CMD ["waitress-serve", "--port=5000", "app:app"]
+CMD ["bash", "-c", "pulseaudio --start --exit-idle-time=-1 && waitress-serve --port=5000 app:app"]
